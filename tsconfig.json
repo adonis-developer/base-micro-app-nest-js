@@ -33,6 +33,12 @@
       ],
       "@app/repository/*": [
         "libs/repository/src/*"
+      ],
+      "@app/middlewares": [
+        "libs/middlewares/src"
+      ],
+      "@app/middlewares/*": [
+        "libs/middlewares/src/*"
       ]
     }
   }

@@ -1,2 +1,2 @@
-export * from './repository.module';
-export * from './repository.service';
+export * from './abstracts/postgres.abstract';
+export * from './interfaces/common.interface';
