@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  auth-svc:
+    container_name: auth-svc
+    image: auth-svc:latest
+    build:
+      context: ../
+      target: production
+      dockerfile: docker/Dockerfile.auth-svc.yaml
+    environment:
+      TYPE_ORM_HOST: host.docker.internal
+    command: node dist/apps/auth-svc/apps/auth-svc/src/main.js
+    ports:
+      - 9090:9090
+    # volumes:
+    #   - ./:/usr/src/app
+    restart: unless-stopped
+
+networks:
+  default:
+    driver: bridge
+# docker-compose -f docker/svc-compose.yaml up

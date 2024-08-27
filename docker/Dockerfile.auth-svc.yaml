@@ -1,0 +1,37 @@
+FROM node:20-alpine AS development
+
+WORKDIR /usr/service
+
+COPY package*.json ./
+
+RUN npm install glob rimraf
+
+RUN npm ci --development
+
+COPY . .
+
+RUN npm run build auth-svc
+
+CMD [ "npm", "run", "start:dev", "auth-svc"]
+
+FROM node:20-alpine AS production
+
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+
+WORKDIR /usr/service
+
+COPY package*.json ./
+
+RUN npm ci --production
+
+COPY . .
+
+COPY --from=development /usr/service/dist ./dist
+
+EXPOSE 9090
+
+CMD [ "node", "dist/apps/auth-svc/apps/auth-svc/src/main.js" ]
+# docker build -t auth-svc:v1 -f docker/Dockerfile.auth-svc.yaml --target development .
+# docker run -p 9099:9090 --name auth-svc auth-svc:v1
+# docker build -t auth-svc:v1 -f docker/Dockerfile.auth-svc.yaml --target production .

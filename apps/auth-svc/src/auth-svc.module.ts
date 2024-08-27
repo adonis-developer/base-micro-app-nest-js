@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { AuthSvcController } from './auth-svc.controller';
 import { AuthSvcService } from './auth-svc.service';
 
@@ -7,6 +7,7 @@ import * as Joi from 'joi';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './modules/users/users.module';
 import { dataSourceConfig } from './configs/data-source';
+import { LoggerMiddleware } from '@app/middlewares';
 
 @Module({
   imports: [
@@ -30,4 +31,8 @@ import { dataSourceConfig } from './configs/data-source';
   controllers: [AuthSvcController],
   providers: [AuthSvcService],
 })
-export class AuthSvcModule {}
+export class AuthSvcModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+}
