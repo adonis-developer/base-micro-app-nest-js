@@ -85,7 +85,8 @@
       "^@app/auth(|/.*)$": "<rootDir>/libs/auth/src/$1",
       "^@app/repository(|/.*)$": "<rootDir>/libs/repository/src/$1",
       "^@app/middlewares(|/.*)$": "<rootDir>/libs/middlewares/src/$1",
-      "^@app/commons(|/.*)$": "<rootDir>/libs/commons/src/$1"
+      "^@app/commons(|/.*)$": "<rootDir>/libs/commons/src/$1",
+      "^@app/services(|/.*)$": "<rootDir>/libs/services/src/$1"
     }
   }
 }

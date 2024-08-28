@@ -18,11 +18,7 @@ class UserRepository
   }
 
   async findUserById(id: string) {
-    return this.useRepository.findOne({
-      where: {
-        id,
-      },
-    });
+    return await this.findById(id);
   }
 }
 

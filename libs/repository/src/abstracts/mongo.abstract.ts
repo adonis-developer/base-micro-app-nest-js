@@ -7,6 +7,29 @@ export abstract class MongoDBRepository<T> implements IRepository<T> {
     this.model = model;
   }
 
+  async softDelete(id: string): Promise<boolean> {
+    const deleteItem = await this.model.findOne({ id });
+    if (!deleteItem) {
+      return false;
+    }
+    await deleteItem.set({
+      deletedAt: new Date().toISOString(),
+    } as any);
+    return !!deleteItem.save();
+  }
+
+  async permanentlyDelete(id: string): Promise<boolean> {
+    const deleteItem = await this.model.findOne({ id });
+    if (!deleteItem) {
+      return false;
+    }
+    return !!(await this.model.findOneAndDelete({ id }));
+  }
+
+  async findById(id: string): Promise<T> {
+    return await this.model.findById({ id });
+  }
+
   async find(): Promise<T[]> {
     return await this.model.find();
   }
@@ -21,7 +44,8 @@ export abstract class MongoDBRepository<T> implements IRepository<T> {
   }
 
   async update(payload: Partial<T>, filter: any): Promise<T> {
-    return (await this.model.updateOne(filter, payload)) as T;
+    await this.model.updateOne(filter, payload);
+    return await this.model.findOne(filter);
   }
 
   async bulkUpdate(payload: T[]): Promise<T[]> {
