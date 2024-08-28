@@ -1,15 +1,22 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IUserRepository } from './interfaces/users.interface';
-import { UserModel } from './entities/user.entity';
+import { IUserModel, IUserRepository } from './interfaces/users.interface';
 
 @Injectable()
 export class UsersService {
   constructor(
     @Inject('IUserRepository')
-    private readonly useRepo: IUserRepository<UserModel>,
+    private readonly useRepo: IUserRepository<IUserModel>,
   ) {}
 
-  findOne(id: number) {
-    return this.useRepo.findUser();
+  async findOne(id: string) {
+    return {
+      user: await this.useRepo.findUserById(id),
+    };
+  }
+
+  async save(user: IUserModel) {
+    return {
+      user: await this.useRepo.save(user),
+    };
   }
 }

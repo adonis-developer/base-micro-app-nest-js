@@ -8,12 +8,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './modules/users/users.module';
 import { dataSourceConfig } from './configs/data-source';
 import { LoggerMiddleware } from '@app/middlewares';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       ...dataSourceConfig,
     }),
+
+    MongooseModule.forRoot('mongodb://admin:admin12345@localhost:27017/'),
     UsersModule,
     ConfigModule.forRoot({
       envFilePath: '.env',

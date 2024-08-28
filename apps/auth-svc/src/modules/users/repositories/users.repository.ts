@@ -1,14 +1,14 @@
 import { PostgresRepository } from '@app/repository';
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { IUserRepository } from '../interfaces/users.interface';
-import { UserEntity, UserModel } from '../entities/user.entity';
+import { IUserModel, IUserRepository } from '../interfaces/users.interface';
+import { UserEntity } from '../entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 class UserRepository
-  extends PostgresRepository<UserModel>
-  implements IUserRepository<UserModel>
+  extends PostgresRepository<IUserModel>
+  implements IUserRepository<IUserModel>
 {
   constructor(
     @InjectRepository(UserEntity)
@@ -17,8 +17,12 @@ class UserRepository
     super(useRepository);
   }
 
-  async findUser() {
-    return this.find();
+  async findUserById(id: string) {
+    return this.useRepository.findOne({
+      where: {
+        id,
+      },
+    });
   }
 }
 

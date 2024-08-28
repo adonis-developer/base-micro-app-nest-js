@@ -1,31 +1,27 @@
-import { PostgresRepository } from '@app/repository';
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
-import { IUserRepository } from '../interfaces/users.interface';
-import { UserEntity, UserModel } from '../entities/user.entity';
-import { InjectRepository } from '@nestjs/typeorm';
+
+import { MongoDBRepository } from '@app/repository';
+
+import { IUserModel, IUserRepository } from '../interfaces/users.interface';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { User } from '../schemas/user.schema';
 
 @Injectable()
 class UserMongoRepository
-  extends PostgresRepository<UserModel>
-  implements IUserRepository<UserModel>
+  extends MongoDBRepository<IUserModel>
+  implements IUserRepository<IUserModel>
 {
   constructor(
-    @InjectRepository(UserEntity)
-    private readonly useRepository: Repository<UserEntity>,
+    @InjectModel(User.name)
+    private userModel: Model<User>,
   ) {
-    super(useRepository);
+    super(userModel);
   }
 
-  async findUser() {
-    return this.find();
-  }
-
-  async findUserByName(name: string) {
-    return this.useRepository.findOne({
-      where: {
-        name,
-      },
+  async findUserById(id: string): Promise<IUserModel> {
+    return await this.model.findOne({
+      id,
     });
   }
 }
