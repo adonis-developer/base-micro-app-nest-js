@@ -18,6 +18,20 @@ export class User implements IUserModel {
   id: string;
 
   @Prop({
+    unique: true,
+    set: (email: string) => email.trim(),
+  })
+  email: string;
+
+  @Prop()
+  password: string;
+
+  @Prop({
+    default: true,
+  })
+  isForcePass: boolean;
+
+  @Prop({
     set: (name: string) => {
       return name.trim();
     },

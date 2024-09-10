@@ -16,5 +16,7 @@ export const env = {
     timeout: Number(process.env.TYPE_ORM_TIMEOUT ?? 1000),
     poolSize: Number(process.env.TYPE_ORM_POOLSIZE ?? 10),
   },
+  auth: {
+    secret: process.env.SECRET_JWT,
+  },
 };
-console.log('🚀 ~ env:', env);

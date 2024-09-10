@@ -1,9 +1,6 @@
-import { IsEmail, IsNotEmpty, IsString, Matches } from 'class-validator';
+import { IsEmail, IsNotEmpty, Matches } from 'class-validator';
 
-export class CreateUserDto {
-  @IsString()
-  name: string;
-
+export class LoginDTO {
   @IsEmail({}, { message: 'Email không hợp lệ.' })
   @IsNotEmpty({ message: 'Email là bắt buộc.' })
   email: string;

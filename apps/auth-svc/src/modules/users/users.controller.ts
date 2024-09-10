@@ -25,7 +25,7 @@ export class UsersController {
 
   @Post()
   saveUser(@Body() userDTO: CreateUserDto) {
-    return this.usersService.save(userDTO as IUserModel);
+    return this.usersService.saveUser(userDTO as IUserModel);
   }
 
   @Put(':id')

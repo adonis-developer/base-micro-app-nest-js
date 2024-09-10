@@ -36,3 +36,7 @@ export const AppDataSource = new DataSource(dataSourceConfig);
 AppDataSource.initialize().then(() => {
   logger.log('AppDataSource connected');
 });
+
+export const dataSourceConfigMongoDB = {
+  connect: 'mongodb://admin:admin12345@localhost:27017/',
+};

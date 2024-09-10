@@ -17,7 +17,7 @@ export class UsersService extends ServiceAbstract<IUserModel> {
 
   async saveUser(user: IUserModel) {
     return {
-      user: await this.useRepo.save(user),
+      user: await this.useRepo.saveUser(user),
     };
   }
 }
