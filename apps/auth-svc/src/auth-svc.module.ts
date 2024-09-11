@@ -8,7 +8,7 @@ import {
   dataSourceConfig,
   dataSourceConfigMongoDB,
 } from './configs/data-source';
-import { LoggerMiddleware } from '@app/middlewares';
+// import { LoggerMiddleware } from '@app/middlewares';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserEntity } from './modules/users/entities/user.entity';
 import UserRepository from './modules/users/repositories/users.repository';
@@ -18,6 +18,9 @@ import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './strategies/local.strategy';
 import { env } from './configs/environment-variable';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { APP_GUARD } from '@nestjs/core';
+import { CipherGuard } from './guards/cipher.guards';
+import { LoggerMiddleware } from '@app/middlewares/logger.middleware';
 
 @Module({
   imports: [
@@ -54,6 +57,10 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     },
     LocalStrategy,
     JwtStrategy,
+    {
+      provide: APP_GUARD,
+      useClass: CipherGuard,
+    },
   ],
 })
 export class AuthSvcModule {

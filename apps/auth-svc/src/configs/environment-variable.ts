@@ -18,5 +18,7 @@ export const env = {
   },
   auth: {
     secret: process.env.SECRET_JWT,
+    secretRefresh: process.env.SECRET_JWT_REFRESH,
+    cipherAccess: process.env.CIPHER_ACCESS,
   },
 };

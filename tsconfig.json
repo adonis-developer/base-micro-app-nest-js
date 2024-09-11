@@ -18,36 +18,16 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@app/auth": [
-        "libs/auth/src"
-      ],
-      "@app/auth/*": [
-        "libs/auth/src/*"
-      ],
-      "@app/repository": [
-        "libs/repository/src"
-      ],
-      "@app/repository/*": [
-        "libs/repository/src/*"
-      ],
-      "@app/middlewares": [
-        "libs/middlewares/src"
-      ],
-      "@app/middlewares/*": [
-        "libs/middlewares/src/*"
-      ],
-      "@app/commons": [
-        "libs/commons/src"
-      ],
-      "@app/commons/*": [
-        "libs/commons/src/*"
-      ],
-      "@app/services": [
-        "libs/services/src"
-      ],
-      "@app/services/*": [
-        "libs/services/src/*"
-      ]
+      "@app/auth": ["libs/auth/src"],
+      "@app/auth/*": ["libs/auth/src/*"],
+      "@app/repository": ["libs/repository/src"],
+      "@app/repository/*": ["libs/repository/src/*"],
+      "@app/middlewares": ["libs/middlewares/"],
+      "@app/middlewares/*": ["libs/middlewares/*"],
+      "@app/commons": ["libs/commons/"],
+      "@app/commons/*": ["libs/commons/*"],
+      "@app/services": ["libs/services/src"],
+      "@app/services/*": ["libs/services/src/*"]
     }
   }
 }

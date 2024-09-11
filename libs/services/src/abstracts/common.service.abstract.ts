@@ -1,4 +1,4 @@
-import { IModel } from '@app/commons';
+import { IModel } from 'libs/commons';
 import { IService } from '../interfaces/common.service.interface';
 import { IRepository } from '@app/repository';
 

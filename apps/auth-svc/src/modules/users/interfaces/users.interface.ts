@@ -1,4 +1,4 @@
-import { IModel } from '@app/commons';
+import { IModel } from '@app/commons/index';
 import { IRepository } from '@app/repository';
 
 export interface IUserRepository<UserModel> extends IRepository<UserModel> {

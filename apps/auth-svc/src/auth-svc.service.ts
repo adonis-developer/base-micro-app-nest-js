@@ -1,11 +1,12 @@
 import { ServiceAbstract } from '@app/services/abstracts/common.service.abstract';
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import {
   IUserModel,
   IUserRepository,
 } from './modules/users/interfaces/users.interface';
 import { JwtService } from '@nestjs/jwt';
-import { _compare } from '@app/commons/hash';
+import { _compare } from 'libs/commons/hash';
+import { env } from './configs/environment-variable';
 
 @Injectable()
 export class AuthSvcService extends ServiceAbstract<IUserModel> {
@@ -15,10 +16,6 @@ export class AuthSvcService extends ServiceAbstract<IUserModel> {
     private readonly jwtService: JwtService,
   ) {
     super(useRepo);
-  }
-
-  async getHello(): Promise<any> {
-    return await this.find();
   }
 
   async validateUser(email: string, password: string): Promise<any> {
@@ -33,8 +30,43 @@ export class AuthSvcService extends ServiceAbstract<IUserModel> {
 
   async doLogin(user: Omit<IUserModel, 'password'>) {
     const payload = { username: user.name, sub: user.id, email: user.email };
+
     return {
       accessToken: this.jwtService.sign(payload),
+      refreshToken: this.jwtService.sign(payload, {
+        expiresIn: '1d',
+        secret: env.auth.secretRefresh,
+      }),
     };
+  }
+
+  async doRefreshToken(accessToken: string, refreshToken: string) {
+    try {
+      await this.jwtService.verifyAsync(accessToken.split(' ')[1]);
+      return {
+        accessToken: accessToken.split(' ')[1],
+        refreshToken,
+      };
+    } catch (error) {
+      if (error.name === 'TokenExpiredError') {
+        try {
+          const isValidRefresh = await this.jwtService.verifyAsync(
+            refreshToken,
+            { secret: env.auth.secretRefresh },
+          );
+
+          delete isValidRefresh.exp;
+          delete isValidRefresh.iat;
+          return {
+            accessToken: this.jwtService.sign(isValidRefresh),
+            refreshToken,
+          };
+        } catch {
+          throw new UnauthorizedException();
+        }
+      } else {
+        throw new UnauthorizedException();
+      }
+    }
   }
 }

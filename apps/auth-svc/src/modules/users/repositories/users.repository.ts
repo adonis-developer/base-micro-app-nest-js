@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { IUserModel, IUserRepository } from '../interfaces/users.interface';
 import { UserEntity } from '../entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { _hash } from '@app/commons/hash';
+import { _hash } from 'libs/commons/hash';
 
 @Injectable()
 class UserRepository

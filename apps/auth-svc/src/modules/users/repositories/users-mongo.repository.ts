@@ -6,7 +6,7 @@ import { IUserModel, IUserRepository } from '../interfaces/users.interface';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from '../schemas/user.schema';
-import { _hash } from '@app/commons/hash';
+import { _hash } from 'libs/commons/hash';
 
 @Injectable()
 class UserMongoRepository

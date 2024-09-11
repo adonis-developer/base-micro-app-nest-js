@@ -13,4 +13,6 @@ export const envSchema = Joi.object({
   TYPE_ORM_TIMEOUT: Joi.number().default(1000),
   TYPE_ORM_POOLSIZE: Joi.number().default(10),
   SECRET_JWT: Joi.string().required(),
+  SECRET_JWT_REFRESH: Joi.string().required(),
+  CIPHER_ACCESS: Joi.string().required(),
 });

@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 import { IUserModel } from '../interfaces/users.interface';
-import { genUUID } from '@app/commons';
+import { genUUID } from 'libs/commons';
 
 export type UserDocument = HydratedDocument<User>;
 
