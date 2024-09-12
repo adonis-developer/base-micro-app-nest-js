@@ -15,16 +15,21 @@
 <a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
 <a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
 <a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
 </p>
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+<!-- [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository. -->
+
+Đây là 1 dự án triển khai cơ bản của 1 mono repo của nestjs:
+
+1. Triển khai các pattern:
+
+   - Repository Pattern -> di chuyển linh hoạt giữa MongoDB vs Postgres or ..., abstract các function chung như find, create, save, bulkSave, update...
+
+2. Triển khai sẵn migration cho mono repo
 
 ## Project setup
 
@@ -35,51 +40,39 @@ $ npm install
 ## Compile and run the project
 
 ```bash
-# development
-$ npm run start
-
 # watch mode
-$ npm run start:dev
+$ npm run start:dev $service
+$ npm run start:dev auth-svc
 
 # production mode
-$ npm run start:prod
+$ npm run start:prod $service
+$ npm run start:prod auth-svc
 ```
 
-## Run tests
+## Run migration DB
 
 ```bash
-# unit tests
-$ npm run test
+# Create migration by entity
+$  npm run build && npx typeorm migration:generate -d dist/apps/$service/src/configs/data-source.js ./apps/$service/src/migrations/InitEntity
+$  npm run build && npx typeorm migration:generate -d dist/apps/auth-svc/src/configs/data-source.js ./apps/auth-svc/src/migrations/InitEntity
 
-# e2e tests
-$ npm run test:e2e
+# Apply migration by entity
+$  npm run build && npx typeorm migration:run -d dist/apps/$service/src/configs/data-source.js
+$  npm run build && npx typeorm migration:run -d dist/apps/auth-svc/src/configs/data-source.js
 
-# test coverage
-$ npm run test:cov
+# Revert migration by entity
+$  npm run build && npx typeorm migration:revert -d dist/apps/$service/src/configs/data-source.js
+$  npm run build && npx typeorm migration:revert -d dist/apps/auth-svc/src/configs/data-source.js
 ```
 
-## Resources
+## Generate resource in monorepo
 
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+$  nest g res $name $path
+$  nest g app identity /modules
+$  nest g lib identity /modules
+```
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+MIT licensed
