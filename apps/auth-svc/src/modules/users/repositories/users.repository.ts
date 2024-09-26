@@ -1,6 +1,6 @@
 import { PostgresRepository } from '@app/repository';
 import { ConflictException, Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { IUserModel, IUserRepository } from '../interfaces/users.interface';
 import { UserEntity } from '../entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -14,6 +14,7 @@ class UserRepository
   constructor(
     @InjectRepository(UserEntity)
     private readonly useRepository: Repository<UserEntity>,
+    private dataSource: DataSource,
   ) {
     super(useRepository);
   }

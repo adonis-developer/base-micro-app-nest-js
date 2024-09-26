@@ -20,7 +20,7 @@ export const dataSourceConfig: DataSourceOptions = {
   // synchronize: true,
   migrations: ['dist/apps/auth-svc/src/migrations/*js'],
   schema: env.database.schema,
-  logging: env.database.logging,
+  logging: true,
   connectTimeoutMS: env.database.timeout, // default 10s
   applicationName: env.database.appName,
   // ssl: env.database.ssl,

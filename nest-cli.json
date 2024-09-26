@@ -7,7 +7,7 @@
     "webpack": false
   },
   "monorepo": true,
-  "root": "apps/gas-quynh-luu",
+  "root": "apps/auth-svc",
   "projects": {
     "products": {
       "type": "application",

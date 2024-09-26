@@ -1,9 +1,10 @@
 import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthSvcService } from './auth-svc.service';
-import { LocalAuthGuard } from './guards/local.guards';
-import { JwtAuthGuard } from './guards/jwt.guards';
+
 import { RefreshGuard } from './guards/refresh.guards';
-import { CipherGuard } from './guards/cipher.guards';
+import { JwtAuthGuard } from '@app/commons/guards/jwt.guards';
+import { LocalAuthGuard } from '@app/commons/guards/local.guards';
+import { Public } from '@app/commons/decorators/public-route';
 
 @Controller('')
 export class AuthSvcController {
@@ -16,12 +17,12 @@ export class AuthSvcController {
   }
 
   @Get('/cipher')
-  @UseGuards(CipherGuard)
   userAll(): any {
     return this.authSvcService.find();
   }
 
   @Post()
+  @Public()
   @UseGuards(LocalAuthGuard)
   login(@Request() req) {
     return this.authSvcService.doLogin(req.user);

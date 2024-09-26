@@ -5,7 +5,7 @@ import {
   ForbiddenException,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { env } from '../configs/environment-variable';
+import { env } from '../../../apps/auth-svc/src/configs/environment-variable';
 import * as CryptoJS from 'crypto-js';
 
 @Injectable()

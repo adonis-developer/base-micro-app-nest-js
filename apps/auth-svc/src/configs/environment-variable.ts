@@ -22,3 +22,5 @@ export const env = {
     cipherAccess: process.env.CIPHER_ACCESS,
   },
 };
+
+console.log(env);

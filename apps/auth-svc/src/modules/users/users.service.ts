@@ -20,4 +20,8 @@ export class UsersService extends ServiceAbstract<IUserModel> {
       user: await this.useRepo.saveUser(user),
     };
   }
+
+  async findAndCount() {
+    return await this.useRepo.find();
+  }
 }

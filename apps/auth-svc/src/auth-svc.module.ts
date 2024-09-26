@@ -19,8 +19,8 @@ import { LocalStrategy } from './strategies/local.strategy';
 import { env } from './configs/environment-variable';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { APP_GUARD } from '@nestjs/core';
-import { CipherGuard } from './guards/cipher.guards';
 import { LoggerMiddleware } from '@app/middlewares/logger.middleware';
+import { JwtAuthGuard } from '@app/commons/guards/jwt.guards';
 
 @Module({
   imports: [
@@ -59,7 +59,7 @@ import { LoggerMiddleware } from '@app/middlewares/logger.middleware';
     JwtStrategy,
     {
       provide: APP_GUARD,
-      useClass: CipherGuard,
+      useClass: JwtAuthGuard,
     },
   ],
 })
