@@ -20,7 +20,12 @@ export const env = {
     secret: process.env.SECRET_JWT,
     secretRefresh: process.env.SECRET_JWT_REFRESH,
     cipherAccess: process.env.CIPHER_ACCESS,
+    resetSecret: process.env.RESET_SECRET,
+  },
+  email: {
+    host: process.env.EMAIL_HOST,
+    pass: process.env.EMAIL_PASSWORD,
+    port: +process.env.EMAIL_PORT,
+    user: process.env.EMAIL_USERNAME,
   },
 };
-
-console.log(env);

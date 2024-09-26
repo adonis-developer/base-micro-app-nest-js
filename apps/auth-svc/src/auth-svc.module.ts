@@ -21,6 +21,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 import { APP_GUARD } from '@nestjs/core';
 import { LoggerMiddleware } from '@app/middlewares/logger.middleware';
 import { JwtAuthGuard } from '@app/commons/guards/jwt.guards';
+import { KycModule } from '@app/kyc';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { JwtAuthGuard } from '@app/commons/guards/jwt.guards';
         expiresIn: '90s',
       },
     }),
+    KycModule,
   ],
   controllers: [AuthSvcController],
   providers: [

@@ -15,3 +15,8 @@ export class LoginDTO {
   )
   password: string;
 }
+export class ForgotPassDTO {
+  @IsEmail({}, { message: 'Email không hợp lệ.' })
+  @IsNotEmpty({ message: 'Email là bắt buộc.' })
+  email: string;
+}

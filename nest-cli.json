@@ -62,6 +62,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/services/tsconfig.lib.json"
       }
+    },
+    "kyc": {
+      "type": "library",
+      "root": "libs/kyc",
+      "entryFile": "index",
+      "sourceRoot": "libs/kyc/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/kyc/tsconfig.lib.json"
+      }
     }
   }
 }

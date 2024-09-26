@@ -15,4 +15,5 @@ export const envSchema = Joi.object({
   SECRET_JWT: Joi.string().required(),
   SECRET_JWT_REFRESH: Joi.string().required(),
   CIPHER_ACCESS: Joi.string().required(),
+  RESET_SECRET: Joi.string().required(),
 });

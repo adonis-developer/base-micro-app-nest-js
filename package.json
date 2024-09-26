@@ -29,13 +29,16 @@
     "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/typeorm": "^10.0.2",
+    "@types/nodemailer": "^6.4.16",
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "crypto-js": "^4.2.0",
     "dotenv": "^16.4.5",
+    "handlebars": "^4.7.8",
     "joi": "^17.13.3",
     "mongoose": "^8.5.4",
+    "nodemailer": "^6.9.15",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
@@ -99,7 +102,8 @@
       "^@app/repository(|/.*)$": "<rootDir>/libs/repository/src/$1",
       "^@app/middlewares(|/.*)$": "<rootDir>/libs/middlewares/src/$1",
       "^@app/commons(|/.*)$": "<rootDir>/libs/commons/src/$1",
-      "^@app/services(|/.*)$": "<rootDir>/libs/services/src/$1"
+      "^@app/services(|/.*)$": "<rootDir>/libs/services/src/$1",
+      "^@app/kyc(|/.*)$": "<rootDir>/libs/kyc/src/$1"
     }
   },
   "lint-staged": {

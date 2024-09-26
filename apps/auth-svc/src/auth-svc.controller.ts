@@ -1,25 +1,14 @@
-import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthSvcService } from './auth-svc.service';
 
 import { RefreshGuard } from './guards/refresh.guards';
-import { JwtAuthGuard } from '@app/commons/guards/jwt.guards';
 import { LocalAuthGuard } from '@app/commons/guards/local.guards';
 import { Public } from '@app/commons/decorators/public-route';
+import { ForgotPassDTO } from './auth-svc.dto';
 
 @Controller('')
 export class AuthSvcController {
   constructor(private readonly authSvcService: AuthSvcService) {}
-
-  @Get()
-  @UseGuards(JwtAuthGuard)
-  getHello(): any {
-    return this.authSvcService.find();
-  }
-
-  @Get('/cipher')
-  userAll(): any {
-    return this.authSvcService.find();
-  }
 
   @Post()
   @Public()
@@ -35,5 +24,11 @@ export class AuthSvcController {
       req.headers['authorization'],
       req.headers['x-refresh'],
     );
+  }
+
+  @Post('/forgot-password')
+  @Public()
+  forgotPass(@Body() forgotPassDTO: ForgotPassDTO) {
+    return this.authSvcService.doForgotPass(forgotPassDTO.email);
   }
 }
